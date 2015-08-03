@@ -134,6 +134,14 @@ setup() {
 }
 
 ruby_exec() {
+  if ! [ -z "$LOCAL_BUNDLE" ]; then
+    if [ "$DEBUG" ] ; then
+      echo "DEBUG: exec bundle exec ruby $@"
+    fi
+    bundle exec ruby "$@"
+    return
+  fi
+
   if [ -z "$VENDORED_JRUBY" ] ; then
 
     # $VENDORED_JRUBY is empty so use the local "ruby" command

@@ -9,3 +9,10 @@ setup
 export JRUBY_OPTS="$JRUBY_OPTS -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1 -J-noverify -X-C -Xcompile.invokedynamic=false"
 
 ruby_exec "${LOGSTASH_HOME}/lib/pluginmanager/main.rb" "$@"
+
+if ! [ -z "$USE_CRUBY" ]; then
+  case "$1" in
+    install|uninstall|update) bundle install;;
+    *);;
+  esac
+fi
